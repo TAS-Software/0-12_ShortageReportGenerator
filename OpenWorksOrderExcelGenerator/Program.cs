@@ -1161,7 +1161,7 @@ namespace BomExcelGenerator
             var supplierBuyers = new List<BOMSupplierManageMatrix>();
             using (var connect = new ConnectDbEntities()) { supplierBuyers = connect.BOMSupplierManageMatrices.ToList(); }
 
-            
+            string theDate = DateTime.Now.ToString("yyyyMMdd");
             string theDateHours = DateTime.Now.ToString("yyyyMMdd HH.mm.ss");
 
             FileInfo fileInfo;
@@ -1326,7 +1326,7 @@ namespace BomExcelGenerator
             using (ReportDbEntities rdb = new ReportDbEntities())
             {
                 var owners = rdb.BOMShortageProductGroups.Include(x => x.BOMShortageOwners).ToList();
-
+                string theDate = DateTime.Now.ToString("yyyyMMdd");
                 string theDateHours = DateTime.Now.ToString("yyyyMMdd HH.mm.ss");
 
                 FileInfo fileInfo;
@@ -1542,7 +1542,7 @@ namespace BomExcelGenerator
                 using (var connect = new ConnectDbEntities()) { supplierBuyers = connect.BOMSupplierManageMatrices.ToList(); }
 
                 List<Buyer> buyerInfo = new List<Buyer>();
-
+                string theDate = DateTime.Now.ToString("yyyyMMdd");
                 string theDateHours = DateTime.Now.ToString("yyyyMMdd HH.mm.ss");
 
                 FileInfo fileInfo;
@@ -1832,6 +1832,7 @@ namespace BomExcelGenerator
                 using (var connect = new ConnectDbEntities()) { supplierBuyers = connect.BOMSupplierManageMatrices.ToList(); }
 
                 List<Buyer> buyerInfo = new List<Buyer>();
+                string theDate = DateTime.Now.ToString("yyyyMMdd");
                 string theDateHours = DateTime.Now.ToString("yyyyMMdd HH.mm.ss");
 
                 FileInfo fileInfo;
