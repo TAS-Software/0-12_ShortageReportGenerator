@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="166e79e8875746119e9b1fe38a1b00d1" Name="Diagram1" ZoomLevel="57" >
+        <EntityTypeShape EntityType="thas01Model.SalesOrderDetail" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="thas01Model.SalesOrder" Width="1.5" PointX="0.75" PointY="1.375" />
+        <AssociationConnector Association="thas01Model.FK_SalesOrderDetails_SalesOrders" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

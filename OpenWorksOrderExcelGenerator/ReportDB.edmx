@@ -1,0 +1,831 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ConnectDbModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BOMDump">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalesOrderTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DespatchDate" Type="datetime" />
+          <Property Name="CusReqDate" Type="datetime" />
+          <Property Name="RunID" Type="nvarchar" MaxLength="100" />
+          <Property Name="LineNumber" Type="int" />
+          <Property Name="MainPart" Type="nvarchar" MaxLength="100" />
+          <Property Name="MainPartDescription" Type="nvarchar(max)" />
+          <Property Name="Sequence" Type="int" />
+          <Property Name="ParentMethod" Type="nvarchar(max)" />
+          <Property Name="ParentVersion" Type="nvarchar(max)" />
+          <Property Name="ParentIssue" Type="nvarchar(max)" />
+          <Property Name="ParentResponsibility" Type="nvarchar(max)" />
+          <Property Name="ComponentPart" Type="nvarchar" MaxLength="100" />
+          <Property Name="ComponentPartDescription" Type="nvarchar(max)" />
+          <Property Name="UnitOfMeasure" Type="nvarchar" MaxLength="15" />
+          <Property Name="UnitCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Level" Type="int" />
+          <Property Name="ComponentMethod" Type="nvarchar(max)" />
+          <Property Name="ComponentVersion" Type="nvarchar(max)" />
+          <Property Name="ComponentIssue" Type="nvarchar(max)" />
+          <Property Name="ComponentUOM" Type="nvarchar(max)" />
+          <Property Name="ScrapPercent" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="SetQuantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="Quantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="OverallQuantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="DefaultLocation" Type="nvarchar(max)" />
+          <Property Name="ProductGroup" Type="nvarchar(max)" />
+          <Property Name="Responsibility" Type="nvarchar(max)" />
+          <Property Name="ConsolidationWindow" Type="nvarchar(max)" />
+          <Property Name="OnHandStockLevel" Type="decimal" Precision="18" Scale="6" />
+        </EntityType>
+        <EntityType Name="BOMLineShortage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SalesOrderTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DespatchDate" Type="datetime" />
+          <Property Name="CustReqDate" Type="datetime" />
+          <Property Name="MainPart" Type="nvarchar(max)" />
+          <Property Name="MainPartDescription" Type="nvarchar(max)" />
+          <Property Name="ComponentPart" Type="nvarchar(max)" />
+          <Property Name="ComponentPartDescription" Type="nvarchar(max)" />
+          <Property Name="ComponentMethod" Type="nvarchar(max)" />
+          <Property Name="ProductGroup" Type="nvarchar(max)" />
+          <Property Name="Responsibility" Type="nvarchar(max)" />
+          <Property Name="UnitOfMeasure" Type="nvarchar" MaxLength="15" />
+          <Property Name="UnitCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="TotalBOMQuantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PriorDemand" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="TotalDemand" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WOIssued" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="Stock" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WoQuantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WoOnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WoArriving" Type="datetime" />
+          <Property Name="WoDelayInDays" Type="nvarchar" MaxLength="100" />
+          <Property Name="PoQuantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PoOnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PoArriving" Type="datetime" />
+          <Property Name="PoDelayInDays" Type="nvarchar" MaxLength="100" />
+          <Property Name="Shortage" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="OnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="ResourceCode" Type="nvarchar(max)" />
+          <Property Name="ResourceGroupName" Type="nvarchar(max)" />
+          <Property Name="ResourceType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="BOMShortageOwner">
+          <Key>
+            <PropertyRef Name="BOMShortageOwnerID" />
+          </Key>
+          <Property Name="BOMShortageOwnerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BOMShortagePGOwner">
+          <Key>
+            <PropertyRef Name="OwnerID" />
+            <PropertyRef Name="PgID" />
+          </Key>
+          <Property Name="OwnerID" Type="int" Nullable="false" />
+          <Property Name="PgID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BOMShortageProductGroup">
+          <Key>
+            <PropertyRef Name="BOMShortageProductGroupID" />
+          </Key>
+          <Property Name="BOMShortageProductGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BOMShortagesSupplierBreakdown">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DespatchDate" Type="datetime" />
+          <Property Name="ComponentPart" Type="nvarchar(max)" />
+          <Property Name="ComponentPartDescription" Type="nvarchar(max)" />
+          <Property Name="ComponentMethod" Type="nvarchar(max)" />
+          <Property Name="ProductGroup" Type="nvarchar(max)" />
+          <Property Name="Responsibility" Type="nvarchar(max)" />
+          <Property Name="LeadTime" Type="int" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="100" />
+          <Property Name="Quantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PriorDemand" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="TotalDemand" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WOIssued" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="Stock" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WoQuantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WoOnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PoQuantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PoOnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="POArriving" Type="datetime" />
+          <Property Name="PODelayInDays" Type="nvarchar" MaxLength="100" />
+          <Property Name="Shortage" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="OnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="UnitCost" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="BOMShortagesSupplierBreakdownSO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalesOrderTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DespatchDate" Type="datetime" />
+          <Property Name="ComponentPart" Type="nvarchar(max)" />
+          <Property Name="ComponentPartDescription" Type="nvarchar(max)" />
+          <Property Name="ComponentMethod" Type="nvarchar(max)" />
+          <Property Name="ProductGroup" Type="nvarchar(max)" />
+          <Property Name="Responsibility" Type="nvarchar(max)" />
+          <Property Name="LeadTime" Type="int" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="100" />
+          <Property Name="Quantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PriorDemand" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="TotalDemand" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WOIssued" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="Stock" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WoQuantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WoOnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PoQuantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PoOnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="POArriving" Type="datetime" />
+          <Property Name="PODelayInDays" Type="nvarchar" MaxLength="100" />
+          <Property Name="Shortage" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="OnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="UnitCost" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="BOMShortagesSupplierBreakdownSOOutputBI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalesOrderTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DespatchDate" Type="datetime" />
+          <Property Name="PODD" Type="datetime" />
+          <Property Name="ComponentPart" Type="nvarchar(max)" />
+          <Property Name="ComponentPartDescription" Type="nvarchar(max)" />
+          <Property Name="ComponentMethod" Type="nvarchar(max)" />
+          <Property Name="ProductGroup" Type="nvarchar(max)" />
+          <Property Name="Responsibility" Type="nvarchar(max)" />
+          <Property Name="LeadTime" Type="int" />
+          <Property Name="SupplierName" Type="nvarchar(max)" />
+          <Property Name="Quantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PriorDemand" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="TotalDemand" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="Stock" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WoQuantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WoOnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PoQuantity" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PoOnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="PoArriving" Type="datetime2" Precision="7" />
+          <Property Name="PoDelayInDays" Type="nvarchar" MaxLength="100" />
+          <Property Name="Shortage" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="OnTime" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="WOIssued" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="ReportDate" Type="date" Nullable="false" />
+          <Property Name="UnitCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BuyerName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="BOMSupplierManageMatrix">
+          <Key>
+            <PropertyRef Name="SupplierMatrixID" />
+          </Key>
+          <Property Name="SupplierMatrixID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supplier" Type="varchar(max)" Nullable="false" />
+          <Property Name="BuyerName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="BuyerEmail" Type="varchar" MaxLength="100" />
+          <Property Name="BuyerID" Type="int" Nullable="false" />
+          <Property Name="SupplierID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OPSSUPBuyerShortageMetric">
+          <Key>
+            <PropertyRef Name="BuyerMetricID" />
+          </Key>
+          <Property Name="BuyerMetricID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuyerName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SupplierCount" Type="int" Nullable="false" />
+          <Property Name="ShortageCount" Type="int" Nullable="false" />
+          <Property Name="NotOnOrder" Type="int" Nullable="false" />
+          <Property Name="NotOnOrderQty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UniquePartsNotOnOrder" Type="int" Nullable="false" />
+          <Property Name="NotSupportingPODD" Type="int" Nullable="false" />
+          <Property Name="NotSupportingPODDQty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UniquePartsNotSupportingPODD" Type="int" Nullable="false" />
+          <Property Name="RecordingDate" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BOMShortagePGOwner_BOMShortageOwner">
+          <End Role="BOMShortageOwner" Type="Self.BOMShortageOwner" Multiplicity="1" />
+          <End Role="BOMShortagePGOwner" Type="Self.BOMShortagePGOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOMShortageOwner">
+              <PropertyRef Name="BOMShortageOwnerID" />
+            </Principal>
+            <Dependent Role="BOMShortagePGOwner">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BOMShortagePGOwner_BOMShortageProductGroup">
+          <End Role="BOMShortageProductGroup" Type="Self.BOMShortageProductGroup" Multiplicity="1" />
+          <End Role="BOMShortagePGOwner" Type="Self.BOMShortagePGOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOMShortageProductGroup">
+              <PropertyRef Name="BOMShortageProductGroupID" />
+            </Principal>
+            <Dependent Role="BOMShortagePGOwner">
+              <PropertyRef Name="PgID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ConnectShortageReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="so" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ConnectShortageReportFULL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ConnectShortageReportINDIVID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="so" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ConnectShortageTotalsBuilder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ConnectShortageWOCopyWorksOrdersFromProd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ConnectShortageWOIssuedBuilder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetShortagesByPartDateSupplierINSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetShortagesByPartDateSupplierSOINSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ConnectDbModel1StoreContainer">
+          <EntitySet Name="BOMDump" EntityType="Self.BOMDump" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOMLineShortage" EntityType="Self.BOMLineShortage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOMShortageOwner" EntityType="Self.BOMShortageOwner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOMShortagePGOwner" EntityType="Self.BOMShortagePGOwner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOMShortageProductGroup" EntityType="Self.BOMShortageProductGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOMShortagesSupplierBreakdown" EntityType="Self.BOMShortagesSupplierBreakdown" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOMShortagesSupplierBreakdownSO" EntityType="Self.BOMShortagesSupplierBreakdownSO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOMShortagesSupplierBreakdownSOOutputBI" EntityType="Self.BOMShortagesSupplierBreakdownSOOutputBI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BOMSupplierManageMatrix" EntityType="Self.BOMSupplierManageMatrix" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OPSSUPBuyerShortageMetric" EntityType="Self.OPSSUPBuyerShortageMetric" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BOMShortagePGOwner_BOMShortageOwner" Association="Self.FK_BOMShortagePGOwner_BOMShortageOwner">
+            <End Role="BOMShortageOwner" EntitySet="BOMShortageOwner" />
+            <End Role="BOMShortagePGOwner" EntitySet="BOMShortagePGOwner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BOMShortagePGOwner_BOMShortageProductGroup" Association="Self.FK_BOMShortagePGOwner_BOMShortageProductGroup">
+            <End Role="BOMShortageProductGroup" EntitySet="BOMShortageProductGroup" />
+            <End Role="BOMShortagePGOwner" EntitySet="BOMShortagePGOwner" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ConnectDbModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BOMDump">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="SalesOrderTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DespatchDate" Type="DateTime" Precision="3" />
+          <Property Name="CusReqDate" Type="DateTime" Precision="3" />
+          <Property Name="RunID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LineNumber" Type="Int32" />
+          <Property Name="MainPart" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MainPartDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sequence" Type="Int32" />
+          <Property Name="ParentMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentVersion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentIssue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParentResponsibility" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentPart" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentPartDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UnitOfMeasure" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Level" Type="Int32" />
+          <Property Name="ComponentMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentVersion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentIssue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentUOM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ScrapPercent" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="SetQuantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Quantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="OverallQuantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="DefaultLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductGroup" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Responsibility" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConsolidationWindow" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OnHandStockLevel" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="UnitCost" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="ReportDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BOMDumps" EntityType="Self.BOMDump" />
+          <FunctionImport Name="ConnectShortageReport" ReturnType="Collection(ConnectDbModel1.ConnectShortageReport_Result)">
+          <Parameter Name="so" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ConnectShortageTotalsBuilder" />
+          <FunctionImport Name="ConnectShortageReportFULL" />
+          <EntitySet Name="BOMLineShortages" EntityType="ConnectDbModel1.BOMLineShortage" />
+          <FunctionImport Name="ConnectShortageReportINDIVID">
+          <Parameter Name="so" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="BOMShortageOwners" EntityType="ConnectDbModel1.BOMShortageOwner" />
+          <EntitySet Name="BOMShortageProductGroups" EntityType="ConnectDbModel1.BOMShortageProductGroup" />
+          <AssociationSet Name="BOMShortagePGOwner" Association="ConnectDbModel1.BOMShortagePGOwner">
+            <End Role="BOMShortageOwner" EntitySet="BOMShortageOwners" />
+            <End Role="BOMShortageProductGroup" EntitySet="BOMShortageProductGroups" />
+          </AssociationSet>
+          <EntitySet Name="BOMShortagesSupplierBreakdowns" EntityType="ConnectDbModel1.BOMShortagesSupplierBreakdown" />
+          <EntitySet Name="BOMShortagesSupplierBreakdownSOes" EntityType="ConnectDbModel1.BOMShortagesSupplierBreakdownSO" />
+          <FunctionImport Name="GetShortagesByPartDateSupplierINSERT" />
+          <FunctionImport Name="GetShortagesByPartDateSupplierSOINSERT" />
+          <EntitySet Name="BOMSupplierManageMatrices" EntityType="ConnectDbModel1.BOMSupplierManageMatrix" />
+          <EntitySet Name="OPSSUPBuyerShortageMetrics" EntityType="ConnectDbModel1.OPSSUPBuyerShortageMetric" />
+          <FunctionImport Name="ConnectShortageWOCopyWorksOrdersFromProd" />
+          <FunctionImport Name="ConnectShortageWOIssuedBuilder" />
+          <EntitySet Name="BOMShortagesSupplierBreakdownSOOutputBIs" EntityType="ConnectDbModel1.BOMShortagesSupplierBreakdownSOOutputBI" />
+        </EntityContainer>
+        <ComplexType Name="ConnectShortageReport_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="SalesOrderTitle" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DespatchDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="RunID" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MainPart" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MainPartDescription" Nullable="true" />
+          <Property Type="String" Name="ComponentPart" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ComponentMethod" Nullable="true" />
+          <Property Type="String" Name="ProductGroup" Nullable="true" />
+          <Property Type="String" Name="Responsibility" Nullable="true" />
+          <Property Type="String" Name="UnitOfMeasure" Nullable="true" MaxLength="15" />
+          <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="TotalPartDemand" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="RunningTotal" Nullable="true" />
+          <Property Type="Decimal" Name="Stock" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="WOTotalQuantity" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="WOMeetDemand" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="DateTime" Name="WOEarliest" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="POTotalQuantity" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="POMeetDemand" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="DateTime" Name="POEarliest" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ResourceCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ResourceGroupName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ResourceType" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="CusReqDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ComponentPartDescription" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="BOMLineShortage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SalesOrderTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DespatchDate" Type="DateTime" Precision="3" />
+          <Property Name="CustReqDate" Type="DateTime" Precision="3" />
+          <Property Name="MainPart" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MainPartDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentPart" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentPartDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductGroup" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Responsibility" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UnitOfMeasure" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="TotalBOMQuantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PriorDemand" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="TotalDemand" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Stock" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="WoQuantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="WoOnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="WoArriving" Type="DateTime" Precision="3" />
+          <Property Name="WoDelayInDays" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PoQuantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PoOnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PoArriving" Type="DateTime" Precision="3" />
+          <Property Name="PoDelayInDays" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Shortage" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="OnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="ResourceCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceGroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResourceType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UnitCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WOIssued" Type="Decimal" Precision="38" Scale="6" />
+        </EntityType>
+        <EntityType Name="BOMShortageOwner">
+          <Key>
+            <PropertyRef Name="BOMShortageOwnerID" />
+          </Key>
+          <Property Name="BOMShortageOwnerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BOMShortageProductGroups" Relationship="ConnectDbModel1.BOMShortagePGOwner" FromRole="BOMShortageOwner" ToRole="BOMShortageProductGroup" />
+        </EntityType>
+        <EntityType Name="BOMShortageProductGroup">
+          <Key>
+            <PropertyRef Name="BOMShortageProductGroupID" />
+          </Key>
+          <Property Name="BOMShortageProductGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BOMShortageOwners" Relationship="ConnectDbModel1.BOMShortagePGOwner" FromRole="BOMShortageProductGroup" ToRole="BOMShortageOwner" />
+        </EntityType>
+        <Association Name="BOMShortagePGOwner">
+          <End Type="ConnectDbModel1.BOMShortageOwner" Role="BOMShortageOwner" Multiplicity="*" />
+          <End Type="ConnectDbModel1.BOMShortageProductGroup" Role="BOMShortageProductGroup" Multiplicity="*" />
+        </Association>
+        <EntityType Name="BOMShortagesSupplierBreakdown">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DespatchDate" Type="DateTime" Precision="3" />
+          <Property Name="ComponentPart" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentPartDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductGroup" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Responsibility" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LeadTime" Type="Int32" />
+          <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PriorDemand" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="TotalDemand" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Stock" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="WoQuantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="WoOnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PoQuantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PoOnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Shortage" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="OnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="UnitCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="POArriving" Type="DateTime" Precision="3" />
+          <Property Name="PODelayInDays" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="WOIssued" Type="Decimal" Precision="38" Scale="6" />
+        </EntityType>
+        <EntityType Name="BOMShortagesSupplierBreakdownSO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalesOrderTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DespatchDate" Type="DateTime" Precision="3" />
+          <Property Name="ComponentPart" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentPartDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductGroup" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Responsibility" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LeadTime" Type="Int32" />
+          <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PriorDemand" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="TotalDemand" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Stock" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="WoQuantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="WoOnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PoQuantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PoOnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Shortage" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="OnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="UnitCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="POArriving" Type="DateTime" Precision="3" />
+          <Property Name="PODelayInDays" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="WOIssued" Type="Decimal" Precision="38" Scale="6" />
+        </EntityType>
+        <EntityType Name="BOMSupplierManageMatrix">
+          <Key>
+            <PropertyRef Name="SupplierMatrixID" />
+          </Key>
+          <Property Name="SupplierMatrixID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supplier" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BuyerName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BuyerEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BuyerID" Type="Int32" Nullable="false" />
+          <Property Name="SupplierID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OPSSUPBuyerShortageMetric">
+          <Key>
+            <PropertyRef Name="BuyerMetricID" />
+          </Key>
+          <Property Name="BuyerMetricID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuyerName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierCount" Type="Int32" Nullable="false" />
+          <Property Name="ShortageCount" Type="Int32" Nullable="false" />
+          <Property Name="NotOnOrder" Type="Int32" Nullable="false" />
+          <Property Name="NotSupportingPODD" Type="Int32" Nullable="false" />
+          <Property Name="RecordingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NotOnOrderQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="NotSupportingPODDQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="UniquePartsNotOnOrder" Type="Int32" Nullable="false" />
+          <Property Name="UniquePartsNotSupportingPODD" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BOMShortagesSupplierBreakdownSOOutputBI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SalesOrderTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DespatchDate" Type="DateTime" Precision="3" />
+          <Property Name="PODD" Type="DateTime" Precision="3" />
+          <Property Name="ComponentPart" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentPartDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ComponentMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductGroup" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Responsibility" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LeadTime" Type="Int32" />
+          <Property Name="SupplierName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PriorDemand" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="TotalDemand" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Stock" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="WoQuantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="WoOnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PoQuantity" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PoOnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="PoArriving" Type="DateTime" Precision="7" />
+          <Property Name="PoDelayInDays" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Shortage" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="OnTime" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="WOIssued" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="ReportDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UnitCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BuyerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ConnectDbModel1StoreContainer" CdmEntityContainer="ReportDbEntities">
+          <EntitySetMapping Name="BOMDumps">
+            <EntityTypeMapping TypeName="ConnectDbModel1.BOMDump">
+              <MappingFragment StoreEntitySet="BOMDump">
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SalesOrderTitle" ColumnName="SalesOrderTitle" />
+                <ScalarProperty Name="DespatchDate" ColumnName="DespatchDate" />
+                <ScalarProperty Name="CusReqDate" ColumnName="CusReqDate" />
+                <ScalarProperty Name="RunID" ColumnName="RunID" />
+                <ScalarProperty Name="LineNumber" ColumnName="LineNumber" />
+                <ScalarProperty Name="MainPart" ColumnName="MainPart" />
+                <ScalarProperty Name="MainPartDescription" ColumnName="MainPartDescription" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="ParentMethod" ColumnName="ParentMethod" />
+                <ScalarProperty Name="ParentVersion" ColumnName="ParentVersion" />
+                <ScalarProperty Name="ParentIssue" ColumnName="ParentIssue" />
+                <ScalarProperty Name="ParentResponsibility" ColumnName="ParentResponsibility" />
+                <ScalarProperty Name="ComponentPart" ColumnName="ComponentPart" />
+                <ScalarProperty Name="ComponentPartDescription" ColumnName="ComponentPartDescription" />
+                <ScalarProperty Name="UnitOfMeasure" ColumnName="UnitOfMeasure" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="ComponentMethod" ColumnName="ComponentMethod" />
+                <ScalarProperty Name="ComponentVersion" ColumnName="ComponentVersion" />
+                <ScalarProperty Name="ComponentIssue" ColumnName="ComponentIssue" />
+                <ScalarProperty Name="ComponentUOM" ColumnName="ComponentUOM" />
+                <ScalarProperty Name="ScrapPercent" ColumnName="ScrapPercent" />
+                <ScalarProperty Name="SetQuantity" ColumnName="SetQuantity" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OverallQuantity" ColumnName="OverallQuantity" />
+                <ScalarProperty Name="DefaultLocation" ColumnName="DefaultLocation" />
+                <ScalarProperty Name="ProductGroup" ColumnName="ProductGroup" />
+                <ScalarProperty Name="Responsibility" ColumnName="Responsibility" />
+                <ScalarProperty Name="ConsolidationWindow" ColumnName="ConsolidationWindow" />
+                <ScalarProperty Name="OnHandStockLevel" ColumnName="OnHandStockLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConnectShortageReport" FunctionName="ConnectDbModel1.Store.ConnectShortageReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ConnectDbModel1.ConnectShortageReport_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SalesOrderTitle" ColumnName="SalesOrderTitle" />
+                <ScalarProperty Name="DespatchDate" ColumnName="DespatchDate" />
+                <ScalarProperty Name="RunID" ColumnName="RunID" />
+                <ScalarProperty Name="MainPart" ColumnName="MainPart" />
+                <ScalarProperty Name="MainPartDescription" ColumnName="MainPartDescription" />
+                <ScalarProperty Name="ComponentPart" ColumnName="ComponentPart" />
+                <ScalarProperty Name="ComponentMethod" ColumnName="ComponentMethod" />
+                <ScalarProperty Name="ProductGroup" ColumnName="ProductGroup" />
+                <ScalarProperty Name="Responsibility" ColumnName="Responsibility" />
+                <ScalarProperty Name="UnitOfMeasure" ColumnName="UnitOfMeasure" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="TotalPartDemand" ColumnName="TotalPartDemand" />
+                <ScalarProperty Name="RunningTotal" ColumnName="RunningTotal" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="WOTotalQuantity" ColumnName="WOTotalQuantity" />
+                <ScalarProperty Name="WOMeetDemand" ColumnName="WOMeetDemand" />
+                <ScalarProperty Name="WOEarliest" ColumnName="WOEarliest" />
+                <ScalarProperty Name="POTotalQuantity" ColumnName="POTotalQuantity" />
+                <ScalarProperty Name="POMeetDemand" ColumnName="POMeetDemand" />
+                <ScalarProperty Name="POEarliest" ColumnName="POEarliest" />
+                <ScalarProperty Name="ResourceCode" ColumnName="ResourceCode" />
+                <ScalarProperty Name="ResourceGroupName" ColumnName="ResourceGroupName" />
+                <ScalarProperty Name="ResourceType" ColumnName="ResourceType" />
+                <ScalarProperty Name="CusReqDate" ColumnName="CusReqDate" />
+                <ScalarProperty Name="ComponentPartDescription" ColumnName="ComponentPartDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ConnectShortageTotalsBuilder" FunctionName="ConnectDbModel1.Store.ConnectShortageTotalsBuilder" />
+          <FunctionImportMapping FunctionImportName="ConnectShortageReportFULL" FunctionName="ConnectDbModel1.Store.ConnectShortageReportFULL" />
+          <EntitySetMapping Name="BOMLineShortages">
+            <EntityTypeMapping TypeName="ConnectDbModel1.BOMLineShortage">
+              <MappingFragment StoreEntitySet="BOMLineShortage">
+                <ScalarProperty Name="WOIssued" ColumnName="WOIssued" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="ResourceType" ColumnName="ResourceType" />
+                <ScalarProperty Name="ResourceGroupName" ColumnName="ResourceGroupName" />
+                <ScalarProperty Name="ResourceCode" ColumnName="ResourceCode" />
+                <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+                <ScalarProperty Name="Shortage" ColumnName="Shortage" />
+                <ScalarProperty Name="PoDelayInDays" ColumnName="PoDelayInDays" />
+                <ScalarProperty Name="PoArriving" ColumnName="PoArriving" />
+                <ScalarProperty Name="PoOnTime" ColumnName="PoOnTime" />
+                <ScalarProperty Name="PoQuantity" ColumnName="PoQuantity" />
+                <ScalarProperty Name="WoDelayInDays" ColumnName="WoDelayInDays" />
+                <ScalarProperty Name="WoArriving" ColumnName="WoArriving" />
+                <ScalarProperty Name="WoOnTime" ColumnName="WoOnTime" />
+                <ScalarProperty Name="WoQuantity" ColumnName="WoQuantity" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="TotalDemand" ColumnName="TotalDemand" />
+                <ScalarProperty Name="PriorDemand" ColumnName="PriorDemand" />
+                <ScalarProperty Name="TotalBOMQuantity" ColumnName="TotalBOMQuantity" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitOfMeasure" ColumnName="UnitOfMeasure" />
+                <ScalarProperty Name="Responsibility" ColumnName="Responsibility" />
+                <ScalarProperty Name="ProductGroup" ColumnName="ProductGroup" />
+                <ScalarProperty Name="ComponentMethod" ColumnName="ComponentMethod" />
+                <ScalarProperty Name="ComponentPartDescription" ColumnName="ComponentPartDescription" />
+                <ScalarProperty Name="ComponentPart" ColumnName="ComponentPart" />
+                <ScalarProperty Name="MainPartDescription" ColumnName="MainPartDescription" />
+                <ScalarProperty Name="MainPart" ColumnName="MainPart" />
+                <ScalarProperty Name="CustReqDate" ColumnName="CustReqDate" />
+                <ScalarProperty Name="DespatchDate" ColumnName="DespatchDate" />
+                <ScalarProperty Name="SalesOrderTitle" ColumnName="SalesOrderTitle" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConnectShortageReportINDIVID" FunctionName="ConnectDbModel1.Store.ConnectShortageReportINDIVID" />
+          <EntitySetMapping Name="BOMShortageOwners">
+            <EntityTypeMapping TypeName="ConnectDbModel1.BOMShortageOwner">
+              <MappingFragment StoreEntitySet="BOMShortageOwner">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BOMShortageOwnerID" ColumnName="BOMShortageOwnerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BOMShortageProductGroups">
+            <EntityTypeMapping TypeName="ConnectDbModel1.BOMShortageProductGroup">
+              <MappingFragment StoreEntitySet="BOMShortageProductGroup">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BOMShortageProductGroupID" ColumnName="BOMShortageProductGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BOMShortagePGOwner" TypeName="ConnectDbModel1.BOMShortagePGOwner" StoreEntitySet="BOMShortagePGOwner">
+            <EndProperty Name="BOMShortageProductGroup">
+              <ScalarProperty Name="BOMShortageProductGroupID" ColumnName="PgID" />
+            </EndProperty>
+            <EndProperty Name="BOMShortageOwner">
+              <ScalarProperty Name="BOMShortageOwnerID" ColumnName="OwnerID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="BOMShortagesSupplierBreakdowns">
+            <EntityTypeMapping TypeName="ConnectDbModel1.BOMShortagesSupplierBreakdown">
+              <MappingFragment StoreEntitySet="BOMShortagesSupplierBreakdown">
+                <ScalarProperty Name="WOIssued" ColumnName="WOIssued" />
+                <ScalarProperty Name="PODelayInDays" ColumnName="PODelayInDays" />
+                <ScalarProperty Name="POArriving" ColumnName="POArriving" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+                <ScalarProperty Name="Shortage" ColumnName="Shortage" />
+                <ScalarProperty Name="PoOnTime" ColumnName="PoOnTime" />
+                <ScalarProperty Name="PoQuantity" ColumnName="PoQuantity" />
+                <ScalarProperty Name="WoOnTime" ColumnName="WoOnTime" />
+                <ScalarProperty Name="WoQuantity" ColumnName="WoQuantity" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="TotalDemand" ColumnName="TotalDemand" />
+                <ScalarProperty Name="PriorDemand" ColumnName="PriorDemand" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="LeadTime" ColumnName="LeadTime" />
+                <ScalarProperty Name="Responsibility" ColumnName="Responsibility" />
+                <ScalarProperty Name="ProductGroup" ColumnName="ProductGroup" />
+                <ScalarProperty Name="ComponentMethod" ColumnName="ComponentMethod" />
+                <ScalarProperty Name="ComponentPartDescription" ColumnName="ComponentPartDescription" />
+                <ScalarProperty Name="ComponentPart" ColumnName="ComponentPart" />
+                <ScalarProperty Name="DespatchDate" ColumnName="DespatchDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BOMShortagesSupplierBreakdownSOes">
+            <EntityTypeMapping TypeName="ConnectDbModel1.BOMShortagesSupplierBreakdownSO">
+              <MappingFragment StoreEntitySet="BOMShortagesSupplierBreakdownSO">
+                <ScalarProperty Name="WOIssued" ColumnName="WOIssued" />
+                <ScalarProperty Name="PODelayInDays" ColumnName="PODelayInDays" />
+                <ScalarProperty Name="POArriving" ColumnName="POArriving" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+                <ScalarProperty Name="Shortage" ColumnName="Shortage" />
+                <ScalarProperty Name="PoOnTime" ColumnName="PoOnTime" />
+                <ScalarProperty Name="PoQuantity" ColumnName="PoQuantity" />
+                <ScalarProperty Name="WoOnTime" ColumnName="WoOnTime" />
+                <ScalarProperty Name="WoQuantity" ColumnName="WoQuantity" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="TotalDemand" ColumnName="TotalDemand" />
+                <ScalarProperty Name="PriorDemand" ColumnName="PriorDemand" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="LeadTime" ColumnName="LeadTime" />
+                <ScalarProperty Name="Responsibility" ColumnName="Responsibility" />
+                <ScalarProperty Name="ProductGroup" ColumnName="ProductGroup" />
+                <ScalarProperty Name="ComponentMethod" ColumnName="ComponentMethod" />
+                <ScalarProperty Name="ComponentPartDescription" ColumnName="ComponentPartDescription" />
+                <ScalarProperty Name="ComponentPart" ColumnName="ComponentPart" />
+                <ScalarProperty Name="DespatchDate" ColumnName="DespatchDate" />
+                <ScalarProperty Name="SalesOrderTitle" ColumnName="SalesOrderTitle" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetShortagesByPartDateSupplierINSERT" FunctionName="ConnectDbModel1.Store.GetShortagesByPartDateSupplierINSERT" />
+          <FunctionImportMapping FunctionImportName="GetShortagesByPartDateSupplierSOINSERT" FunctionName="ConnectDbModel1.Store.GetShortagesByPartDateSupplierSOINSERT" />
+          <EntitySetMapping Name="BOMSupplierManageMatrices">
+            <EntityTypeMapping TypeName="ConnectDbModel1.BOMSupplierManageMatrix">
+              <MappingFragment StoreEntitySet="BOMSupplierManageMatrix">
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="BuyerID" ColumnName="BuyerID" />
+                <ScalarProperty Name="BuyerEmail" ColumnName="BuyerEmail" />
+                <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="SupplierMatrixID" ColumnName="SupplierMatrixID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OPSSUPBuyerShortageMetrics">
+            <EntityTypeMapping TypeName="ConnectDbModel1.OPSSUPBuyerShortageMetric">
+              <MappingFragment StoreEntitySet="OPSSUPBuyerShortageMetric">
+                <ScalarProperty Name="UniquePartsNotSupportingPODD" ColumnName="UniquePartsNotSupportingPODD" />
+                <ScalarProperty Name="UniquePartsNotOnOrder" ColumnName="UniquePartsNotOnOrder" />
+                <ScalarProperty Name="NotSupportingPODDQty" ColumnName="NotSupportingPODDQty" />
+                <ScalarProperty Name="NotOnOrderQty" ColumnName="NotOnOrderQty" />
+                <ScalarProperty Name="RecordingDate" ColumnName="RecordingDate" />
+                <ScalarProperty Name="NotSupportingPODD" ColumnName="NotSupportingPODD" />
+                <ScalarProperty Name="NotOnOrder" ColumnName="NotOnOrder" />
+                <ScalarProperty Name="ShortageCount" ColumnName="ShortageCount" />
+                <ScalarProperty Name="SupplierCount" ColumnName="SupplierCount" />
+                <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+                <ScalarProperty Name="BuyerMetricID" ColumnName="BuyerMetricID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConnectShortageWOCopyWorksOrdersFromProd" FunctionName="ConnectDbModel1.Store.ConnectShortageWOCopyWorksOrdersFromProd" />
+          <FunctionImportMapping FunctionImportName="ConnectShortageWOIssuedBuilder" FunctionName="ConnectDbModel1.Store.ConnectShortageWOIssuedBuilder" />
+          <EntitySetMapping Name="BOMShortagesSupplierBreakdownSOOutputBIs">
+            <EntityTypeMapping TypeName="ConnectDbModel1.BOMShortagesSupplierBreakdownSOOutputBI">
+              <MappingFragment StoreEntitySet="BOMShortagesSupplierBreakdownSOOutputBI">
+                <ScalarProperty Name="BuyerName" ColumnName="BuyerName" />
+                <ScalarProperty Name="UnitCost" ColumnName="UnitCost" />
+                <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
+                <ScalarProperty Name="WOIssued" ColumnName="WOIssued" />
+                <ScalarProperty Name="OnTime" ColumnName="OnTime" />
+                <ScalarProperty Name="Shortage" ColumnName="Shortage" />
+                <ScalarProperty Name="PoDelayInDays" ColumnName="PoDelayInDays" />
+                <ScalarProperty Name="PoArriving" ColumnName="PoArriving" />
+                <ScalarProperty Name="PoOnTime" ColumnName="PoOnTime" />
+                <ScalarProperty Name="PoQuantity" ColumnName="PoQuantity" />
+                <ScalarProperty Name="WoOnTime" ColumnName="WoOnTime" />
+                <ScalarProperty Name="WoQuantity" ColumnName="WoQuantity" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="TotalDemand" ColumnName="TotalDemand" />
+                <ScalarProperty Name="PriorDemand" ColumnName="PriorDemand" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="LeadTime" ColumnName="LeadTime" />
+                <ScalarProperty Name="Responsibility" ColumnName="Responsibility" />
+                <ScalarProperty Name="ProductGroup" ColumnName="ProductGroup" />
+                <ScalarProperty Name="ComponentMethod" ColumnName="ComponentMethod" />
+                <ScalarProperty Name="ComponentPartDescription" ColumnName="ComponentPartDescription" />
+                <ScalarProperty Name="ComponentPart" ColumnName="ComponentPart" />
+                <ScalarProperty Name="PODD" ColumnName="PODD" />
+                <ScalarProperty Name="DespatchDate" ColumnName="DespatchDate" />
+                <ScalarProperty Name="SalesOrderTitle" ColumnName="SalesOrderTitle" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

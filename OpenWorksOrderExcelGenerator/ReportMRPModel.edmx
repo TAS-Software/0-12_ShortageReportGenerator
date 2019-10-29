@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="thas01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SalesOrderDetails">
+          <Key>
+            <PropertyRef Name="SalesOrderNumber" />
+            <PropertyRef Name="LineNumber" />
+          </Key>
+          <Property Name="SalesOrderDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalesOrderNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="LineNumber" Type="smallint" Nullable="false" />
+          <Property Name="PartID" Type="int" Nullable="false" />
+          <Property Name="DespatchID" Type="int" />
+          <Property Name="DespatchStatusID" Type="smallint" Nullable="false" />
+          <Property Name="DespatchDate" Type="datetime" Nullable="false" />
+          <Property Name="ActualDespatchDate" Type="datetime" />
+          <Property Name="QuantityOrdered" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="QuantityDespatched" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="DeliveryAddressID" Type="int" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="38" Scale="6" Nullable="false" />
+          <Property Name="PartCustomerCrossReferenceID" Type="int" />
+          <Property Name="DiscountPercent" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="BatchCardNotes" Type="nvarchar(max)" />
+          <Property Name="DeliveryNoteText" Type="nvarchar(max)" />
+          <Property Name="NominalID" Type="int" />
+          <Property Name="TaxID" Type="int" />
+          <Property Name="QuoteNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="OnHold" Type="bit" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CustRequiredDate" Type="datetime" />
+          <Property Name="QuoteLineNumber" Type="int" />
+          <Property Name="StandardCostInBase" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="StandardCostTotal" Type="decimal" Precision="18" Scale="6" Nullable="false" />
+          <Property Name="PrintedInSalesPickList" Type="bit" Nullable="false" />
+          <Property Name="AdvanceInvoiceValue" Type="decimal" Precision="38" Scale="6" Nullable="false" />
+          <Property Name="AssessableValue" Type="decimal" Precision="38" Scale="6" Nullable="false" />
+          <Property Name="ITRTaxStructureID" Type="int" />
+          <Property Name="MemoDate2" Type="datetime" />
+          <Property Name="MemoDate3" Type="datetime" />
+          <Property Name="ReferencePartID" Type="int" />
+          <Property Name="OriginalLineNumber" Type="smallint" />
+          <Property Name="IsSplitted" Type="bit" />
+          <Property Name="ShowSplittedLineOnReport" Type="bit" />
+          <Property Name="GroupID" Type="int" />
+          <Property Name="Order" Type="decimal" Precision="36" Scale="2" />
+          <Property Name="UnitPriceSource" Type="nvarchar" MaxLength="30" />
+          <Property Name="InitialCost" Type="decimal" Precision="38" Scale="4" Nullable="false" />
+          <Property Name="InitialCostDate" Type="datetime" />
+          <Property Name="InitialMark-UpPercent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="InitialMarginPercent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CurrentCost" Type="decimal" Precision="38" Scale="4" Nullable="false" />
+          <Property Name="CurrentCostDate" Type="datetime" />
+          <Property Name="CurrentMark-UpPercent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CurrentMarginPercent" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalesOrders">
+          <Key>
+            <PropertyRef Name="SalesOrderNumber" />
+          </Key>
+          <Property Name="SalesOrderNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="SalesOrderStatusCode" Type="smallint" Nullable="false" />
+          <Property Name="SecondSalesReference" Type="nvarchar" MaxLength="25" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="DeliveryAddressID" Type="int" Nullable="false" />
+          <Property Name="ContactID" Type="int" />
+          <Property Name="CertificateOfConformity" Type="bit" Nullable="false" />
+          <Property Name="NominalID" Type="int" />
+          <Property Name="ExchangeRate" Type="decimal" Precision="18" Scale="10" />
+          <Property Name="TaxID" Type="int" />
+          <Property Name="DiscountPercent" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SalesHeaderText" Type="nvarchar(max)" />
+          <Property Name="SalesFooterText" Type="nvarchar(max)" />
+          <Property Name="ClockNumber" Type="int" />
+          <Property Name="DateRaised" Type="datetime" />
+          <Property Name="Printed" Type="smallint" Nullable="false" />
+          <Property Name="Spooled" Type="bit" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IntrastatsDeliveryID" Type="int" />
+          <Property Name="IntrastatsTransactionID" Type="int" />
+          <Property Name="IntrastatsTransportID" Type="int" />
+          <Property Name="DivisionID" Type="int" />
+          <Property Name="Status" Type="smallint" Nullable="false" />
+          <Property Name="ShowPartAllocation" Type="bit" />
+          <Property Name="Memo1" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Memo2" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Memo3" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Memo4" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Memo5" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Memo6" Type="nvarchar" MaxLength="1000" />
+          <Property Name="SalesOrderTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="IssueNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="EquipmentID" Type="int" />
+          <Property Name="SectionID" Type="int" />
+          <Property Name="TermID" Type="int" />
+          <Property Name="Days" Type="int" />
+          <Property Name="ServiceStatusID" Type="int" Nullable="false" />
+          <Property Name="OrderProjectTypeID" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="InvoiceAddressID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SalesOrderDetails_SalesOrders">
+          <End Role="SalesOrders" Type="Self.SalesOrders" Multiplicity="1" />
+          <End Role="SalesOrderDetails" Type="Self.SalesOrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesOrders">
+              <PropertyRef Name="SalesOrderNumber" />
+            </Principal>
+            <Dependent Role="SalesOrderDetails">
+              <PropertyRef Name="SalesOrderNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="THAS_CONNECT_BOMCYCLE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="THAS">
+          <Parameter Name="SalesOrderTitleName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="THAS_CONNECT_GetShortageReportSOSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="THAS">
+          <Parameter Name="Periodstart" Type="datetime" Mode="In" />
+          <Parameter Name="Periodend" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="thas01ModelStoreContainer">
+          <EntitySet Name="SalesOrderDetails" EntityType="Self.SalesOrderDetails" Schema="Sales" store:Type="Tables" />
+          <EntitySet Name="SalesOrders" EntityType="Self.SalesOrders" Schema="Sales" store:Type="Tables" />
+          <AssociationSet Name="FK_SalesOrderDetails_SalesOrders" Association="Self.FK_SalesOrderDetails_SalesOrders">
+            <End Role="SalesOrders" EntitySet="SalesOrders" />
+            <End Role="SalesOrderDetails" EntitySet="SalesOrderDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="thas01Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="thas01Entities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="THAS_CONNECT_BOMCYCLE">
+          <Parameter Name="SalesOrderTitleName" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="SalesOrderDetails" EntityType="thas01Model.SalesOrderDetail" />
+          <EntitySet Name="SalesOrders" EntityType="thas01Model.SalesOrder" />
+          <AssociationSet Name="FK_SalesOrderDetails_SalesOrders" Association="thas01Model.FK_SalesOrderDetails_SalesOrders">
+            <End Role="SalesOrder" EntitySet="SalesOrders" />
+            <End Role="SalesOrderDetail" EntitySet="SalesOrderDetails" />
+          </AssociationSet>
+          <FunctionImport Name="THAS_CONNECT_GetShortageReportSOSchedule" ReturnType="Collection(String)">
+            <Parameter Name="Periodstart" Mode="In" Type="DateTime" />
+            <Parameter Name="Periodend" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="SalesOrderDetail">
+          <Key>
+            <PropertyRef Name="SalesOrderNumber" />
+            <PropertyRef Name="LineNumber" />
+          </Key>
+          <Property Name="SalesOrderDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalesOrderNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="LineNumber" Type="Int16" Nullable="false" />
+          <Property Name="PartID" Type="Int32" Nullable="false" />
+          <Property Name="DespatchID" Type="Int32" />
+          <Property Name="DespatchStatusID" Type="Int16" Nullable="false" />
+          <Property Name="DespatchDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActualDespatchDate" Type="DateTime" Precision="3" />
+          <Property Name="QuantityOrdered" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="QuantityDespatched" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="DeliveryAddressID" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="38" Scale="6" />
+          <Property Name="PartCustomerCrossReferenceID" Type="Int32" />
+          <Property Name="DiscountPercent" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="BatchCardNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryNoteText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NominalID" Type="Int32" />
+          <Property Name="TaxID" Type="Int32" />
+          <Property Name="QuoteNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="OnHold" Type="Boolean" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CustRequiredDate" Type="DateTime" Precision="3" />
+          <Property Name="QuoteLineNumber" Type="Int32" />
+          <Property Name="StandardCostInBase" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="StandardCostTotal" Type="Decimal" Nullable="false" Precision="18" Scale="6" />
+          <Property Name="PrintedInSalesPickList" Type="Boolean" Nullable="false" />
+          <Property Name="AdvanceInvoiceValue" Type="Decimal" Nullable="false" Precision="38" Scale="6" />
+          <Property Name="AssessableValue" Type="Decimal" Nullable="false" Precision="38" Scale="6" />
+          <Property Name="ITRTaxStructureID" Type="Int32" />
+          <Property Name="MemoDate2" Type="DateTime" Precision="3" />
+          <Property Name="MemoDate3" Type="DateTime" Precision="3" />
+          <Property Name="ReferencePartID" Type="Int32" />
+          <Property Name="OriginalLineNumber" Type="Int16" />
+          <Property Name="IsSplitted" Type="Boolean" />
+          <Property Name="ShowSplittedLineOnReport" Type="Boolean" />
+          <Property Name="GroupID" Type="Int32" />
+          <Property Name="Order" Type="Decimal" Precision="36" Scale="2" />
+          <Property Name="UnitPriceSource" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SalesOrder" Relationship="thas01Model.FK_SalesOrderDetails_SalesOrders" FromRole="SalesOrderDetail" ToRole="SalesOrder" />
+          <Property Name="InitialCost" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
+          <Property Name="InitialCostDate" Type="DateTime" Precision="3" />
+          <Property Name="InitialMark_UpPercent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="InitialMarginPercent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CurrentCost" Type="Decimal" Nullable="false" Precision="38" Scale="4" />
+          <Property Name="CurrentCostDate" Type="DateTime" Precision="3" />
+          <Property Name="CurrentMark_UpPercent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CurrentMarginPercent" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="SalesOrder">
+          <Key>
+            <PropertyRef Name="SalesOrderNumber" />
+          </Key>
+          <Property Name="SalesOrderNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="SalesOrderStatusCode" Type="Int16" Nullable="false" />
+          <Property Name="SecondSalesReference" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="DeliveryAddressID" Type="Int32" Nullable="false" />
+          <Property Name="ContactID" Type="Int32" />
+          <Property Name="CertificateOfConformity" Type="Boolean" Nullable="false" />
+          <Property Name="NominalID" Type="Int32" />
+          <Property Name="ExchangeRate" Type="Decimal" Precision="18" Scale="10" />
+          <Property Name="TaxID" Type="Int32" />
+          <Property Name="DiscountPercent" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SalesHeaderText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SalesFooterText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClockNumber" Type="Int32" />
+          <Property Name="DateRaised" Type="DateTime" Precision="3" />
+          <Property Name="Printed" Type="Int16" Nullable="false" />
+          <Property Name="Spooled" Type="Boolean" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IntrastatsDeliveryID" Type="Int32" />
+          <Property Name="IntrastatsTransactionID" Type="Int32" />
+          <Property Name="IntrastatsTransportID" Type="Int32" />
+          <Property Name="DivisionID" Type="Int32" />
+          <Property Name="Status" Type="Int16" Nullable="false" />
+          <Property Name="ShowPartAllocation" Type="Boolean" />
+          <Property Name="Memo1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Memo2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Memo3" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Memo4" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Memo5" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Memo6" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="SalesOrderTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IssueNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="EquipmentID" Type="Int32" />
+          <Property Name="SectionID" Type="Int32" />
+          <Property Name="TermID" Type="Int32" />
+          <Property Name="Days" Type="Int32" />
+          <Property Name="ServiceStatusID" Type="Int32" Nullable="false" />
+          <Property Name="OrderProjectTypeID" Type="Int32" />
+          <NavigationProperty Name="SalesOrderDetails" Relationship="thas01Model.FK_SalesOrderDetails_SalesOrders" FromRole="SalesOrder" ToRole="SalesOrderDetail" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="InvoiceAddressID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SalesOrderDetails_SalesOrders">
+          <End Type="thas01Model.SalesOrder" Role="SalesOrder" Multiplicity="1" />
+          <End Type="thas01Model.SalesOrderDetail" Role="SalesOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesOrder">
+              <PropertyRef Name="SalesOrderNumber" />
+            </Principal>
+            <Dependent Role="SalesOrderDetail">
+              <PropertyRef Name="SalesOrderNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="thas01ModelStoreContainer" CdmEntityContainer="thas01Entities" >
+          <FunctionImportMapping FunctionImportName="THAS_CONNECT_BOMCYCLE" FunctionName="thas01Model.Store.THAS_CONNECT_BOMCYCLE" />
+          <EntitySetMapping Name="SalesOrderDetails">
+            <EntityTypeMapping TypeName="thas01Model.SalesOrderDetail">
+              <MappingFragment StoreEntitySet="SalesOrderDetails">
+                <ScalarProperty Name="CurrentMarginPercent" ColumnName="CurrentMarginPercent" />
+                <ScalarProperty Name="CurrentMark_UpPercent" ColumnName="CurrentMark-UpPercent" />
+                <ScalarProperty Name="CurrentCostDate" ColumnName="CurrentCostDate" />
+                <ScalarProperty Name="CurrentCost" ColumnName="CurrentCost" />
+                <ScalarProperty Name="InitialMarginPercent" ColumnName="InitialMarginPercent" />
+                <ScalarProperty Name="InitialMark_UpPercent" ColumnName="InitialMark-UpPercent" />
+                <ScalarProperty Name="InitialCostDate" ColumnName="InitialCostDate" />
+                <ScalarProperty Name="InitialCost" ColumnName="InitialCost" />
+                <ScalarProperty Name="UnitPriceSource" ColumnName="UnitPriceSource" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="ShowSplittedLineOnReport" ColumnName="ShowSplittedLineOnReport" />
+                <ScalarProperty Name="IsSplitted" ColumnName="IsSplitted" />
+                <ScalarProperty Name="OriginalLineNumber" ColumnName="OriginalLineNumber" />
+                <ScalarProperty Name="ReferencePartID" ColumnName="ReferencePartID" />
+                <ScalarProperty Name="MemoDate3" ColumnName="MemoDate3" />
+                <ScalarProperty Name="MemoDate2" ColumnName="MemoDate2" />
+                <ScalarProperty Name="ITRTaxStructureID" ColumnName="ITRTaxStructureID" />
+                <ScalarProperty Name="AssessableValue" ColumnName="AssessableValue" />
+                <ScalarProperty Name="AdvanceInvoiceValue" ColumnName="AdvanceInvoiceValue" />
+                <ScalarProperty Name="PrintedInSalesPickList" ColumnName="PrintedInSalesPickList" />
+                <ScalarProperty Name="StandardCostTotal" ColumnName="StandardCostTotal" />
+                <ScalarProperty Name="StandardCostInBase" ColumnName="StandardCostInBase" />
+                <ScalarProperty Name="QuoteLineNumber" ColumnName="QuoteLineNumber" />
+                <ScalarProperty Name="CustRequiredDate" ColumnName="CustRequiredDate" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="OnHold" ColumnName="OnHold" />
+                <ScalarProperty Name="QuoteNumber" ColumnName="QuoteNumber" />
+                <ScalarProperty Name="TaxID" ColumnName="TaxID" />
+                <ScalarProperty Name="NominalID" ColumnName="NominalID" />
+                <ScalarProperty Name="DeliveryNoteText" ColumnName="DeliveryNoteText" />
+                <ScalarProperty Name="BatchCardNotes" ColumnName="BatchCardNotes" />
+                <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+                <ScalarProperty Name="PartCustomerCrossReferenceID" ColumnName="PartCustomerCrossReferenceID" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="DeliveryAddressID" ColumnName="DeliveryAddressID" />
+                <ScalarProperty Name="QuantityDespatched" ColumnName="QuantityDespatched" />
+                <ScalarProperty Name="QuantityOrdered" ColumnName="QuantityOrdered" />
+                <ScalarProperty Name="ActualDespatchDate" ColumnName="ActualDespatchDate" />
+                <ScalarProperty Name="DespatchDate" ColumnName="DespatchDate" />
+                <ScalarProperty Name="DespatchStatusID" ColumnName="DespatchStatusID" />
+                <ScalarProperty Name="DespatchID" ColumnName="DespatchID" />
+                <ScalarProperty Name="PartID" ColumnName="PartID" />
+                <ScalarProperty Name="LineNumber" ColumnName="LineNumber" />
+                <ScalarProperty Name="SalesOrderNumber" ColumnName="SalesOrderNumber" />
+                <ScalarProperty Name="SalesOrderDetailsID" ColumnName="SalesOrderDetailsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesOrders">
+            <EntityTypeMapping TypeName="thas01Model.SalesOrder">
+              <MappingFragment StoreEntitySet="SalesOrders">
+                <ScalarProperty Name="InvoiceAddressID" ColumnName="InvoiceAddressID" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="OrderProjectTypeID" ColumnName="OrderProjectTypeID" />
+                <ScalarProperty Name="ServiceStatusID" ColumnName="ServiceStatusID" />
+                <ScalarProperty Name="Days" ColumnName="Days" />
+                <ScalarProperty Name="TermID" ColumnName="TermID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IssueNumber" ColumnName="IssueNumber" />
+                <ScalarProperty Name="SalesOrderTitle" ColumnName="SalesOrderTitle" />
+                <ScalarProperty Name="Memo6" ColumnName="Memo6" />
+                <ScalarProperty Name="Memo5" ColumnName="Memo5" />
+                <ScalarProperty Name="Memo4" ColumnName="Memo4" />
+                <ScalarProperty Name="Memo3" ColumnName="Memo3" />
+                <ScalarProperty Name="Memo2" ColumnName="Memo2" />
+                <ScalarProperty Name="Memo1" ColumnName="Memo1" />
+                <ScalarProperty Name="ShowPartAllocation" ColumnName="ShowPartAllocation" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DivisionID" ColumnName="DivisionID" />
+                <ScalarProperty Name="IntrastatsTransportID" ColumnName="IntrastatsTransportID" />
+                <ScalarProperty Name="IntrastatsTransactionID" ColumnName="IntrastatsTransactionID" />
+                <ScalarProperty Name="IntrastatsDeliveryID" ColumnName="IntrastatsDeliveryID" />
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="Spooled" ColumnName="Spooled" />
+                <ScalarProperty Name="Printed" ColumnName="Printed" />
+                <ScalarProperty Name="DateRaised" ColumnName="DateRaised" />
+                <ScalarProperty Name="ClockNumber" ColumnName="ClockNumber" />
+                <ScalarProperty Name="SalesFooterText" ColumnName="SalesFooterText" />
+                <ScalarProperty Name="SalesHeaderText" ColumnName="SalesHeaderText" />
+                <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
+                <ScalarProperty Name="TaxID" ColumnName="TaxID" />
+                <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+                <ScalarProperty Name="NominalID" ColumnName="NominalID" />
+                <ScalarProperty Name="CertificateOfConformity" ColumnName="CertificateOfConformity" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="DeliveryAddressID" ColumnName="DeliveryAddressID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="SecondSalesReference" ColumnName="SecondSalesReference" />
+                <ScalarProperty Name="SalesOrderStatusCode" ColumnName="SalesOrderStatusCode" />
+                <ScalarProperty Name="SalesOrderNumber" ColumnName="SalesOrderNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="THAS_CONNECT_GetShortageReportSOSchedule" FunctionName="thas01Model.Store.THAS_CONNECT_GetShortageReportSOSchedule" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
